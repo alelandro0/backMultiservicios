@@ -7,8 +7,7 @@ import { resolve } from 'path';
 const app = express();
 
 app.use(cors({
-    origin: "https://moonlit-sorbet-b9d042.netlify.app",
-    credentials:true
+    origin: '*'
 }));
 app.use(morgan("dev"));
 app.use(express.json());
