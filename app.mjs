@@ -24,6 +24,7 @@ const server = http.createServer(app);
 const io = new SocketServer(server, {
     cors: {
         origin: "https://dainty-baklava-d89b97.netlify.app",
+        credentials: true
     },
 });
 const generateTokenSecret = () => {

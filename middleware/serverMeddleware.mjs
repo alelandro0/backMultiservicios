@@ -7,7 +7,7 @@ import { resolve } from 'path';
 const app = express();
 const corsOption={
     origin: "https://dainty-baklava-d89b97.netlify.app",
-    credencials:true
+    credentials:true
 }
 
 app.use(cors(corsOption));
