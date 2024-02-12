@@ -45,9 +45,7 @@ export const gets = async (req, res) => {
         }
 
         // Verificar si el usuario tiene una imagen de perfil
-        if (!user.imageProfile) {
-            return res.status(404).json({ message: 'Usuario no tiene una imagen de perfil.' });
-        }
+       
 
         // Si el usuario tiene una imagen de perfil, devolverla en la respuesta
         return res.status(200).json({ imageProfile: user.imageProfile });
