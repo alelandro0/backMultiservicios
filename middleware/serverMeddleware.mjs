@@ -5,12 +5,11 @@ import bodyParser from 'body-parser';
 import { resolve } from 'path';
 
 const app = express();
-const corsOption={
+
+app.use(cors({
     origin: "https://moonlit-sorbet-b9d042.netlify.app",
     credentials:true
-}
-
-app.use(cors(corsOption));
+}));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
