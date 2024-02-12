@@ -6,7 +6,7 @@ import { resolve } from 'path';
 
 const app = express();
 const corsOption={
-    origin: "https://dainty-baklava-d89b97.netlify.app",
+    origin: "https://moonlit-sorbet-b9d042.netlify.app",
     credentials:true
 }
 

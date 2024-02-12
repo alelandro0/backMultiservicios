@@ -23,7 +23,7 @@ const server = http.createServer(app);
 
 const io = new SocketServer(server, {
     cors: {
-        origin: "https://dainty-baklava-d89b97.netlify.app",
+        origin: "https://moonlit-sorbet-b9d042.netlify.app",
         credentials: true
     },
 });
