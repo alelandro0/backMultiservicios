@@ -10,7 +10,7 @@ const corsOption={
     credencials:true
 }
 
-app.use(cors());
+app.use(cors(corsOption));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
