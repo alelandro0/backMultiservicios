@@ -23,7 +23,7 @@ const server = http.createServer(app);
 
 const io = new SocketServer(server, {
     cors: {
-        origin: "https://celebrated-maamoul-d848e7.netlify.app",
+        origin: "https://dainty-baklava-d89b97.netlify.app",
     },
 });
 const generateTokenSecret = () => {
