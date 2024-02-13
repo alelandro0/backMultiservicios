@@ -4,6 +4,11 @@ async function main() {
         await mongoose.connect(process.env.BD_CONNECTION_STRING, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            writeConcern: {
+                w: 'majority',
+                j: true,
+                wtimeout: 1000
+            },
         });
         console.log("Conectado a MongoDB :D");
     } catch (error) {
