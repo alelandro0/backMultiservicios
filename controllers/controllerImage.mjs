@@ -38,7 +38,7 @@ export const posts = async (req, res) => {
 export const gets = async (req, res) => {
     try {
         const userId = req.params.userId; // Suponiendo que el ID de usuario se pasa como parámetro en la URL
-        const user = await User.findOne({ _id: userId });
+        const user = await User.findOne({ id: userId });
 
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado.' });
@@ -46,9 +46,9 @@ export const gets = async (req, res) => {
 
         // Verificar si el usuario tiene una imagen de perfil
         if (!user.imageProfile) {
-            // Si el usuario no tiene una imagen de perfil, devolver una imagen por defecto
-            return res.status(200).json({ imageProfile: 'https://img.blogs.es/anexom/wp-content/uploads/2016/04/foto-perfil.jpg' });
+            return res.status(404).json({ message: 'Usuario no tiene una imagen de perfil.' });
         }
+
         // Si el usuario tiene una imagen de perfil, devolverla en la respuesta
         return res.status(200).json({ imageProfile: user.imageProfile });
     } catch (error) {

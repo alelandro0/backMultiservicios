@@ -6,21 +6,21 @@ const postPublication = async (req, res) => {
     const description = req.body.description; // Obtener la primera descripción
     const userId = req.user.id;
     try {
-        const user = await User.findById(userId);
+        const userToUpdate = await User.findById(userId);
 
-        if (!user) {
+        if (!userToUpdate) {
             return res.status(404).json({ message: 'Usuario no encontrado.' });
         }
 
         const { downloadURL } = await uploadFileP(image[0]);
         console.log('Inicio de la URL:', downloadURL);
 
-        user.publication.push({
+        userToUpdate.publication.push({
             image: downloadURL,
             description: description
         });
 
-        await user.save();
+        await userToUpdate.save();
         console.log('URLs de las imágenes correctas:', downloadURL);
         return res.status(201).json({ message: 'Publicación realizada exitosamente.', downloadURL });
     } catch (error) {
@@ -32,7 +32,7 @@ const postPublication = async (req, res) => {
 const getPublication = async (req, res) => {
     try {
         const userId = req.params.userId;
-        const user = await User.findOne({_id:userId});
+        const user = await User.findOne(userId);
         // Verificar si el ID de usuario es válido
         if (!user) {
             return res.status(400).json({ message: 'ID de usuario no proporcionado.' });
