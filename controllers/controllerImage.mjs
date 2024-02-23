@@ -37,8 +37,12 @@ export const posts = async (req, res) => {
 
 export const gets = async (req, res) => {
     try {
-        const userId = req.params.userId; // Suponiendo que el ID de usuario se pasa como parámetro en la URL
-        const user = await User.findOne({ id: userId });
+        const userId = req.params.id; // Suponiendo que el ID de usuario se pasa como parámetro en la URL
+
+        // Buscar el usuario específico por su ID en la base de datos
+        const user = await User.findOne({ _id: userId });
+        console.log('id de profile ', userId);
+        console.log("Usuario encontrado:", user);
 
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado.' });

@@ -1,6 +1,6 @@
 import Mongoose from "mongoose";
 import getUserInfo  from "../lib/getUserInfo.mjs";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { generateAccessToken, generateRefreshToken } from "../auth/generateTokens.mjs";
 import Token from "../models/token.mjs";
 
@@ -8,13 +8,16 @@ const UserSchema = new Mongoose.Schema({
   id: { type: Object },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  name: { type: String, required: true },
-  imageProfile: String,
+  name: { type: String, required: true , unique: true },
+  imageProfile:{type: String} ,
   publication:[{
+    _id: { type: Mongoose.Schema.Types.ObjectId, auto: true },
     image: {type: String, required: true},
     description: String,
+    estado:{type:Boolean}
   }],
-  roll:Boolean
+  roll:{type: String, },
+  estado:{type:Boolean}
 });
 
 UserSchema.pre("save", function (next) {

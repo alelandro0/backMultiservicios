@@ -4,17 +4,20 @@ import loginRouter from "./routes/login.mjs"
 import userRouter from "./routes/user.mjs"
 import signoutRouter from "./routes/signout.mjs"
 import refreshTokenRouter from "./routes/refreshToken.mjs"
-import publicationsRoutes from "./routes/publicationsRoutes.mjs"
 import { router as images } from "./routes/images.mjs"
 import { router as getImage  } from "./routes/imageGet.mjs";
 import {router as publicationPost} from "./routes/routesPublicationPost.mjs"
 import {router as publicationGet  } from "./routes/routerPublicGet.mjs";
+import {router as citas} from './routes/Appoinment.mjs'
 import { authenticate } from "./middleware/authenticate.mjs";
 import dotenv from "dotenv"
 import { Server as SocketServer } from "socket.io";
 import crypto from "crypto";
 import main from "./validations/conectionServer.mjs";
 import http from "http";
+import { router as DeletePubli  } from "./routes/DeletePubli.mjs";
+import {router as publicationGetAll  } from "./routes/routerPublicGetAll.mjs";
+import { router as getUser } from "./routes/getUser.mjs";
 
 dotenv.config();
 const expressPort = process.env.PORT || 5000;
@@ -44,16 +47,21 @@ io.on('connection', socket => {
 
 main();
 
+
+
 app.use("/api/signup", signupRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/user", authenticate, userRouter);
 app.use("/api/signout", signoutRouter);
 app.use("/api/refresh-token", refreshTokenRouter);
-app.use('/api/publication', publicationsRoutes);
+app.use("/api/delete",authenticate,DeletePubli )
 app.use("/api/upload",authenticate , images);
 app.use("/api/getImage", getImage);
 app.use("/api/publicationpost", authenticate, publicationPost)
 app.use("/api/publicationget", publicationGet)
+app.use("/api/publicationgetAll", publicationGetAll);
+app.use("/api/citas",citas)
+app.use('/api/getUser',getUser)
 
 server.listen(expressPort, () => {
     console.log(`El servidor de Express se está ejecutando en el puerto: ${expressPort}`);

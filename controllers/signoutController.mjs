@@ -1,19 +1,21 @@
+
 import getTokenFromHeader from "../auth/getTokenFromHeader.mjs";
 import Token from "../models/token.mjs";
 import {jsonResponse} from "../lib/jsonResponse.mjs";
 
-const deleteSignout= async(req, res)=>{
+const deleteSignout = async (req, res) => {
     try {
         const refreshToken = getTokenFromHeader(req.headers);
-        if(refreshToken){
+        if (refreshToken) {
             await Token.findOneAndRemove({token: refreshToken});
-            res.status(200).json(jsonResponse(500, { message: "Server error" }));
+            return res.status(200).json(jsonResponse(200, { message: "Logout successful" }));
+        } else {
+            return res.status(400).json(jsonResponse(400, { message: "Refresh token not provided" }));
         }
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
-        res.status(500).json(jsonResponse(500, {error: "Error del server"}))
+        return res.status(500).json(jsonResponse(500, { error: "Server error" }));
     }
+};
 
-}
-export default deleteSignout
+export default deleteSignout;
