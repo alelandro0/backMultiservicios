@@ -7,7 +7,7 @@ import { resolve } from 'path';
 const app = express();
 
 app.use(cors({
-    origin: 'https://friendly-sorbet-361078.netlify.app',
+    origin: 'https://ephemeral-arithmetic-138bac.netlify.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
   }));
