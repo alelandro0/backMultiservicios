@@ -7,7 +7,7 @@ import { resolve } from 'path';
 const app = express();
 
 app.use(cors({
-    origin: 'multiservicios-2024.netlify.app',
+    origin: 'https://multiservicios-2024.netlify.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
   }));
