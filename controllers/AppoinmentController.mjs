@@ -4,17 +4,13 @@ import User from '../models/user.mjs';
 
 export const createAppointment = async (req, res) => {
     try {
-        const { title, date, description, userId, estado } = req.body;
+        const { title, date, description, hora } = req.body;
 
         // Verifica si el usuario existe
-        const user = await User.findById(userId);
+        const user = await User.findOne({name:title});
+        console.log("ide del user",user);
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-
-        // Verifica que el estado proporcionado esté dentro de las opciones permitidas
-        if (estado && !['pendiente', 'aceptada', 'rechazada'].includes(estado)) {
-            return res.status(400).json({ message: 'Estado de cita no válido' });
         }
 
         // Crea la cita utilizando el modelo de cita
@@ -22,18 +18,17 @@ export const createAppointment = async (req, res) => {
             title,
             nombre: user.name,
             date,
+            hora,
             description,
-            userId,
-            estado: estado || 'pendiente' // Asigna 'pendiente' si no se proporciona ningún estado
+            userId:user.id ,
+            estado:'pendiente' // Asigna 'pendiente' si no se proporciona ningún estado
         });
 
         res.status(201).json(cita);
     } catch (err) {
-       
         res.status(400).json({ message: err.message }); // Cambio de código de estado a 400 en caso de error
     }
-};
-
+}
 // Controlador para actualizar una cita
 export const updateAppointment = async (req, res) => {
     try {
