@@ -8,7 +8,6 @@ import { router as images } from "./routes/images.mjs"
 import { router as getImage  } from "./routes/imageGet.mjs";
 import {router as publicationPost} from "./routes/routesPublicationPost.mjs"
 import {router as publicationGet  } from "./routes/routerPublicGet.mjs";
-import {router as citas} from './routes/Appoinment.mjs'
 import { authenticate } from "./middleware/authenticate.mjs";
 import dotenv from "dotenv"
 import { Server as SocketServer } from "socket.io";
@@ -17,7 +16,12 @@ import main from "./validations/conectionServer.mjs";
 import http from "http";
 import { router as DeletePubli  } from "./routes/DeletePubli.mjs";
 import {router as publicationGetAll  } from "./routes/routerPublicGetAll.mjs";
-import { router as getUser } from "./routes/getUser.mjs";
+import {router as citas} from './routes/Appoinment.mjs'
+import {router as cancelCita} from './routes/cancelarCitas.mjs'
+import { router as chat  } from "./routes/chatai.mjs";
+import { router as CitasUsuarios } from "./routes/getCitasUsuario.mjs";
+import { router as agendaProfesional } from "./routes/getCitasProfesinal.mjs";
+import { router as UpdatePerfil } from "./routes/UpdateUser.mjs";
 
 dotenv.config();
 const expressPort = process.env.PORT || 5000;
@@ -60,8 +64,12 @@ app.use("/api/getImage", getImage);
 app.use("/api/publicationpost", authenticate, publicationPost)
 app.use("/api/publicationget", publicationGet)
 app.use("/api/publicationgetAll", publicationGetAll);
-app.use("/api/citas",citas)
-app.use('/api/getUser',getUser)
+app.use("/api/citas",citas);
+app.use('/api/cancelar-cita',cancelCita)
+app.use("/api/chat", chat)
+app.use("/api/citas-usuario",CitasUsuarios)
+app.use("/api/agenda-profesional", agendaProfesional)
+app.use("/api/perfil", UpdatePerfil)
 
 server.listen(expressPort, () => {
     console.log(`El servidor de Express se está ejecutando en el puerto: ${expressPort}`);

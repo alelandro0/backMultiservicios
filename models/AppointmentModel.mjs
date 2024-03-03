@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const citaSchema = new Schema({
-    title: { type: String },
+    ProfesionalId:{type: mongoose.Schema.Types.ObjectId},
     nombre:{type: String},
     date: { type: Date, required: true },
     hora: { type: String, require:true },
@@ -13,6 +13,7 @@ const citaSchema = new Schema({
     userId: { type: mongoose.Schema.Types.ObjectId},
     estado: { type: String }
 });
+
 const Cita = mongoose.model('Cita', citaSchema);
 
 export default Cita; // Exporta el modelo de cita como default

@@ -3,8 +3,8 @@ import express from 'express'
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { resolve } from 'path';
-
 const app = express();
+
 
 app.use(cors({
     origin: 'https://ephemeral-arithmetic-138bac.netlify.app',
@@ -23,4 +23,5 @@ app.use((err, req, res, next) => {
     }
     next();
 });
+
 export default app;
