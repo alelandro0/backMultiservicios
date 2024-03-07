@@ -3,5 +3,5 @@ import { getPublicationAll } from "../controllers/controllerPulblication.mjs";
 
 const router = express.Router()
 
-router.get('', getPublicationAll);
+router.get('/', getPublicationAll);
 export {router}
